@@ -1,0 +1,30 @@
+- hosts: localhost
+  gather_facts: no
+  tasks:
+
+  - name: config hdfs file
+    blockinfile:
+        path: "/etc/hadoop/hdfs-site.xml"
+        state: present
+        insertafter: "<configuration>"
+        block: |
+          <property>
+          <name>dfs.name.dir</name>
+          <value>/name</value>
+          </property>
+
+  - name: config core file
+    blockinfile:
+        path: "/etc/hadoop/core-site.xml"
+        state: present
+        insertafter: "<configuration>"
+        block: |
+          <property>
+          <name>fs.default.name</name>
+          <value>hdfs://master.lw.com:9001</value>
+          </property>
+  - name: start data node
+    command: "hadoop-daemon.sh start namenode"
+  - name: "Flushing firewall"
+    command: "iptables -F"
+    

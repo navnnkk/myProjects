@@ -1,0 +1,23 @@
+- hosts: 192.168.43.68
+  vars:
+    - iso_path: "/dvd"
+    - iso: "/dev/cdrom"
+  tasks:
+   - name: create directory
+     file:
+       path: /dvd
+       state: directory
+   - name: mount iso
+     mount:
+       path: "{{iso_path}}"
+       src: "{{iso}}"
+       fstype: iso9660
+       state: mounted
+   - name: Configure yum repository
+     yum_repository:
+       name: dvd
+       description: rpm packages
+       file: yum
+       baseurl: "file://{{iso_path}}"
+       gpgcheck: no
+       enabled: yes
