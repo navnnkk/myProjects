@@ -27,3 +27,5 @@ Intelligent automated system for various works.
 3. The assistant will send a command according to our voice input to the **server system** which will have power to access all pcs.
 4. The **automation in the servers are maintained using ansible playbooks** that configure systems of client pcs with ine command.
 5. The main focus in this project has always been to make the voice assistant as much intelligent as possible.
+
+Windows is used as Client System and Red Hat is used as Server System.
